@@ -476,10 +476,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [collectionView.dataSource collectionView:collectionView messageBubbleImageDataForItemAtIndexPath:indexPath];
         cell.messageBubbleImageView.image = [bubbleImageDataSource messageBubbleImage];
         cell.messageBubbleImageView.highlightedImage = [bubbleImageDataSource messageBubbleHighlightedImage];
-        
-        if ([messageItem hasAttachment]) {
-            [cell setIsAttahmentButtonHidden:NO];
-        }
     }
     else {
         id<JSQMessageMediaData> messageMedia = [messageItem media];
@@ -487,6 +483,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         NSParameterAssert(cell.mediaView != nil);
     }
 
+    [cell setIsAttahmentButtonHidden:![messageItem hasAttachment]];
+    
     BOOL needsAvatar = YES;
     if (isOutgoingMessage && CGSizeEqualToSize(collectionView.collectionViewLayout.outgoingAvatarViewSize, CGSizeZero)) {
         needsAvatar = NO;
