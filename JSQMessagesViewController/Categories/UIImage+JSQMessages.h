@@ -76,4 +76,6 @@
  */
 + (UIImage *)jsq_defaultPlayImage;
 
++ (UIImage *)jsq_attachmentImage;
+
 @end

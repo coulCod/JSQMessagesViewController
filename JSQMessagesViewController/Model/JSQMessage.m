@@ -90,9 +90,36 @@
     return self;
 }
 
+- (instancetype)initWithSenderId:(NSString *)senderId
+               senderDisplayName:(NSString *)senderDisplayName
+                            date:(NSDate *)date
+                            text:(NSString *)text
+                      attachment:(id<JSQAttachmentData>)attachment {
+    
+    NSParameterAssert(senderId != nil);
+    NSParameterAssert(senderDisplayName != nil);
+    NSParameterAssert(date != nil);
+    NSParameterAssert(attachment != nil);
+    NSParameterAssert(text != nil);
+    
+    self = [super init];
+    if (self) {
+        _senderId = [senderId copy];
+        _senderDisplayName = [senderDisplayName copy];
+        _date = [date copy];
+        _attachment = attachment;
+        _text = text;
+    }
+    return self;
+}
+
 - (NSUInteger)messageHash
 {
     return self.hash;
+}
+
+- (BOOL) hasAttachment {
+    return (self.attachment != nil);
 }
 
 #pragma mark - NSObject
@@ -113,7 +140,16 @@
         return NO;
     }
 
-    BOOL hasEqualContent = self.isMediaMessage ? [self.media isEqual:aMessage.media] : [self.text isEqualToString:aMessage.text];
+    BOOL hasEqualContent;
+    
+    if (self.isMediaMessage) {
+        hasEqualContent = [self.media isEqual:aMessage.media];
+    } else {
+        hasEqualContent = [self.text isEqualToString:aMessage.text];
+        if (self.attachment) {
+            hasEqualContent = hasEqualContent && ([self.attachment isEqual:aMessage.attachment]);
+        }
+    }
 
     return [self.senderId isEqualToString:aMessage.senderId]
     && [self.senderDisplayName isEqualToString:aMessage.senderDisplayName]
@@ -123,7 +159,15 @@
 
 - (NSUInteger)hash
 {
-    NSUInteger contentHash = self.isMediaMessage ? [self.media mediaHash] : self.text.hash;
+    NSUInteger contentHash;
+    if (self.isMediaMessage) {
+        contentHash = [self.media mediaHash];
+    } else if (!self.attachment) {
+        contentHash = self.text.hash;
+    } else {
+        contentHash = self.text.hash ^ [self.attachment attachmentHash];
+    }
+    
     return self.senderId.hash ^ self.date.hash ^ contentHash;
 }
 
@@ -150,6 +194,7 @@
         _isMediaMessage = [aDecoder decodeBoolForKey:NSStringFromSelector(@selector(isMediaMessage))];
         _text = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(text))];
         _media = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(media))];
+        _attachment = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(attachment))];
     }
     return self;
 }
@@ -161,6 +206,10 @@
     [aCoder encodeObject:self.date forKey:NSStringFromSelector(@selector(date))];
     [aCoder encodeBool:self.isMediaMessage forKey:NSStringFromSelector(@selector(isMediaMessage))];
     [aCoder encodeObject:self.text forKey:NSStringFromSelector(@selector(text))];
+    
+    if ([self.attachment conformsToProtocol:@protocol(NSCoding)]) {
+        [aCoder encodeObject:self.attachment forKey:NSStringFromSelector(@selector(attachment))];
+    }
 
     if ([self.media conformsToProtocol:@protocol(NSCoding)]) {
         [aCoder encodeObject:self.media forKey:NSStringFromSelector(@selector(media))];
@@ -176,6 +225,10 @@
                                                  senderDisplayName:self.senderDisplayName
                                                               date:self.date
                                                              media:self.media];
+    }
+    
+    if (self.attachment) {
+        return [[[self class] allocWithZone:zone] initWithSenderId:self.senderId senderDisplayName:self.senderDisplayName date:self.date text:self.text attachment:self.attachment];
     }
 
     return [[[self class] allocWithZone:zone] initWithSenderId:self.senderId

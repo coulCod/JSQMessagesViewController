@@ -103,4 +103,6 @@
  */
 @property (assign, nonatomic) CGFloat cellBottomLabelHeight;
 
+@property (assign, nonatomic) CGSize attachmentButtonSize;
+
 @end

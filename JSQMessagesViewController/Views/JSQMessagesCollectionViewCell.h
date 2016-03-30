@@ -20,6 +20,7 @@
 
 #import "JSQMessagesLabel.h"
 #import "JSQMessagesCellTextView.h"
+#import "JSQMessagesCellAttachmentButton.h"
 
 @class JSQMessagesCollectionViewCell;
 
@@ -166,6 +167,10 @@
  *  This gesture handles the tap event for the avatarImageView and notifies the cell's delegate.
  */
 @property (weak, nonatomic, readonly) UITapGestureRecognizer *tapGestureRecognizer;
+
+@property (weak, nonatomic, readonly) JSQMessagesCellAttachmentButton *attachmentButton;
+
+@property (assign, nonatomic) BOOL isAttahmentButtonHidden;
 
 #pragma mark - Class methods
 

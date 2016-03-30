@@ -476,6 +476,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [collectionView.dataSource collectionView:collectionView messageBubbleImageDataForItemAtIndexPath:indexPath];
         cell.messageBubbleImageView.image = [bubbleImageDataSource messageBubbleImage];
         cell.messageBubbleImageView.highlightedImage = [bubbleImageDataSource messageBubbleHighlightedImage];
+        
+        if ([messageItem hasAttachment]) {
+            [cell setIsAttahmentButtonHidden:NO];
+        }
     }
     else {
         id<JSQMessageMediaData> messageMedia = [messageItem media];

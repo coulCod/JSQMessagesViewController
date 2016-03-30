@@ -18,6 +18,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "JSQAttachmentData.h"
 #import "JSQMessageData.h"
 
 /**
@@ -63,6 +64,7 @@
  */
 @property (copy, nonatomic, readonly) id<JSQMessageMediaData> media;
 
+@property (copy, nonatomic, readonly) id<JSQAttachmentData> attachment;
 
 #pragma mark - Initialization
 
@@ -130,6 +132,13 @@
                senderDisplayName:(NSString *)senderDisplayName
                             date:(NSDate *)date
                            media:(id<JSQMessageMediaData>)media;
+
+
+- (instancetype)initWithSenderId:(NSString *)senderId
+               senderDisplayName:(NSString *)senderDisplayName
+                            date:(NSDate *)date
+                            text:(NSString *)text
+                      attachment:(id<JSQAttachmentData>)attachment;
 
 /**
  *  Not a valid initializer.

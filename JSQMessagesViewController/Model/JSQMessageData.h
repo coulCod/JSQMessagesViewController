@@ -19,6 +19,7 @@
 #import <Foundation/Foundation.h>
 
 #import "JSQMessageMediaData.h"
+#import "JSQAttachmentData.h"
 
 /**
  *  The `JSQMessageData` protocol defines the common interface through which 
@@ -81,6 +82,8 @@
  */
 - (NSUInteger)messageHash;
 
+- (BOOL) hasAttachment;
+
 @optional
 
 /**
@@ -96,5 +99,7 @@
  *  @warning You must not return `nil` from this method.
  */
 - (id<JSQMessageMediaData>)media;
+
+- (id<JSQAttachmentData>)attachment;
 
 @end

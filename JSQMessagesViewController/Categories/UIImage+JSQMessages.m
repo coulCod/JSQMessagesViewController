@@ -100,4 +100,9 @@
     return [UIImage jsq_bubbleImageFromBundleWithName:@"play"];
 }
 
++ (UIImage *)jsq_attachmentImage
+{
+    return [UIImage jsq_bubbleImageFromBundleWithName:@"attachment"];
+}
+
 @end

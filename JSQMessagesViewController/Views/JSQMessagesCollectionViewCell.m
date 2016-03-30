@@ -34,6 +34,7 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 @property (weak, nonatomic) IBOutlet JSQMessagesLabel *cellTopLabel;
 @property (weak, nonatomic) IBOutlet JSQMessagesLabel *messageBubbleTopLabel;
 @property (weak, nonatomic) IBOutlet JSQMessagesLabel *cellBottomLabel;
+@property (weak, nonatomic) IBOutlet JSQMessagesCellAttachmentButton *attachmentButton;
 
 @property (weak, nonatomic) IBOutlet UIView *messageBubbleContainerView;
 @property (weak, nonatomic) IBOutlet UIImageView *messageBubbleImageView;
@@ -55,6 +56,11 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewWidthConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewHeightConstraint;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *attachmentButtonLeadingConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *attachmentButtonHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *attachmentButtonBottomConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *attachmentButtonTrailingConstraint;
 
 @property (assign, nonatomic) UIEdgeInsets textViewFrameInsets;
 
@@ -116,6 +122,8 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     self.cellBottomLabelHeightConstraint.constant = 0.0f;
 
     self.avatarViewSize = CGSizeZero;
+    
+    self.isAttahmentButtonHidden = YES;
 
     self.cellTopLabel.textAlignment = NSTextAlignmentCenter;
     self.cellTopLabel.font = [UIFont boldSystemFontOfSize:12.0f];
@@ -270,6 +278,17 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 
 #pragma mark - Setters
 
+- (void) setIsAttahmentButtonHidden:(BOOL)isAttahmentButtonHidden {
+    _isAttahmentButtonHidden = isAttahmentButtonHidden;
+
+    [self.attachmentButton setHidden:isAttahmentButtonHidden];
+    
+    [self jsq_updateConstraint:self.attachmentButtonLeadingConstraint withConstant:isAttahmentButtonHidden ? 0.0f : 15.0f];
+    [self jsq_updateConstraint:self.attachmentButtonTrailingConstraint withConstant:isAttahmentButtonHidden ? 0.0f : 15.0f];
+    [self jsq_updateConstraint:self.attachmentButtonHeightConstraint withConstant:isAttahmentButtonHidden ? 0.0f : 20.0f];
+    [self jsq_updateConstraint:self.attachmentButtonBottomConstraint withConstant:isAttahmentButtonHidden ? 0.0f : 10.0f];
+}
+
 - (void)setBackgroundColor:(UIColor *)backgroundColor
 {
     [super setBackgroundColor:backgroundColor];
@@ -305,6 +324,7 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     [self jsq_updateConstraint:self.textViewBottomVerticalSpaceConstraint withConstant:textViewFrameInsets.bottom];
     [self jsq_updateConstraint:self.textViewAvatarHorizontalSpaceConstraint withConstant:textViewFrameInsets.right];
     [self jsq_updateConstraint:self.textViewMarginHorizontalSpaceConstraint withConstant:textViewFrameInsets.left];
+    [self jsq_updateConstraint:self.attachmentButtonLeadingConstraint withConstant:textViewFrameInsets.left];
 }
 
 - (void)setMediaView:(UIView *)mediaView

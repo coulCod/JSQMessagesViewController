@@ -34,6 +34,11 @@
     _messageBubbleContainerViewWidth = ceilf(messageBubbleContainerViewWidth);
 }
 
+- (void) setAttachmentButtonSize:(CGSize)attachmentButtonSize {
+    NSParameterAssert(attachmentButtonSize.width >= 0.0f && attachmentButtonSize.height >= 0.0f);
+    _attachmentButtonSize = [self jsq_correctedAvatarSizeFromSize:attachmentButtonSize];
+}
+
 - (void)setIncomingAvatarViewSize:(CGSize)incomingAvatarViewSize
 {
     NSParameterAssert(incomingAvatarViewSize.width >= 0.0f && incomingAvatarViewSize.height >= 0.0f);
@@ -96,6 +101,7 @@
             || !UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.textViewTextContainerInsets, self.textViewTextContainerInsets)
             || !CGSizeEqualToSize(layoutAttributes.incomingAvatarViewSize, self.incomingAvatarViewSize)
             || !CGSizeEqualToSize(layoutAttributes.outgoingAvatarViewSize, self.outgoingAvatarViewSize)
+            || !CGSizeEqualToSize(layoutAttributes.attachmentButtonSize, self.attachmentButtonSize)
             || (int)layoutAttributes.messageBubbleContainerViewWidth != (int)self.messageBubbleContainerViewWidth
             || (int)layoutAttributes.cellTopLabelHeight != (int)self.cellTopLabelHeight
             || (int)layoutAttributes.messageBubbleTopLabelHeight != (int)self.messageBubbleTopLabelHeight
@@ -131,6 +137,7 @@
     copy.cellTopLabelHeight = self.cellTopLabelHeight;
     copy.messageBubbleTopLabelHeight = self.messageBubbleTopLabelHeight;
     copy.cellBottomLabelHeight = self.cellBottomLabelHeight;
+    copy.attachmentButtonSize = self.attachmentButtonSize;
     
     return copy;
 }

@@ -516,9 +516,11 @@
         
         if ([msg.senderId isEqualToString:self.senderId]) {
             cell.textView.textColor = [UIColor blackColor];
+            cell.attachmentButton.tintColor = [UIColor blackColor];
         }
         else {
             cell.textView.textColor = [UIColor whiteColor];
+            cell.attachmentButton.tintColor = [UIColor whiteColor];
         }
         
         cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
