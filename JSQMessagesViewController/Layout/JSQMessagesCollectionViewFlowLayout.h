@@ -187,6 +187,9 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault;
  */
 @property (assign, nonatomic) NSUInteger cacheLimit;
 
+
+@property (assign, nonatomic) CGSize attachmentButtonSize;
+
 /**
  *  Computes and returns the size of the `messageBubbleImageView` property of a `JSQMessagesCollectionViewCell`
  *  at the specified indexPath.

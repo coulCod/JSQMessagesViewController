@@ -83,6 +83,8 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     _springinessEnabled = NO;
     _springResistanceFactor = 1000;
     
+    _attachmentButtonSize = CGSizeMake(140.0f, 20.0f);
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(jsq_didReceiveApplicationMemoryWarningNotification:)
                                                  name:UIApplicationDidReceiveMemoryWarningNotification

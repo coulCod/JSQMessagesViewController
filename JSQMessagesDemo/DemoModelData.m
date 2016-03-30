@@ -163,14 +163,14 @@
 - (void)addAttachmentMessageIncoming
 {
     JSQAttachmentMessageItem *attachment = [[JSQAttachmentMessageItem alloc] initWithURL:[NSURL URLWithString:@"http://seductive-mobile.com"] type:@"text/html"];
-    JSQMessage *attachmentMessage = [[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires senderDisplayName:kJSQDemoAvatarDisplayNameSquires date:[NSDate date] text:@"Incoming: It is simple, elegant, and easy to use. There are super sweet default settings, but you can customize like crazy. And of course an attachment." attachment:attachment];
+    JSQMessage *attachmentMessage = [[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires senderDisplayName:kJSQDemoAvatarDisplayNameSquires date:[NSDate date] text:@"Incom" attachment:attachment];
     [self.messages addObject:attachmentMessage];
 }
 
 - (void)addAttachmentMessageOutgoing
 {
     JSQAttachmentMessageItem *attachment = [[JSQAttachmentMessageItem alloc] initWithURL:[NSURL URLWithString:@"http://seductive-mobile.com"] type:@"text/html"];
-    JSQMessage *attachmentMessage = [[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdWoz senderDisplayName:kJSQDemoAvatarDisplayNameSquires date:[NSDate date] text:@"Outgoing: It is simple, elegant, and easy to use. There are super sweet default settings, but you can customize like crazy. And of course an attachment." attachment:attachment];
+    JSQMessage *attachmentMessage = [[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdWoz senderDisplayName:kJSQDemoAvatarDisplayNameSquires date:[NSDate date] text:@"Out" attachment:attachment];
     [self.messages addObject:attachmentMessage];
 }
 

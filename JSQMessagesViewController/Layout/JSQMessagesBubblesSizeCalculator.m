@@ -126,15 +126,15 @@
         CGFloat verticalContainerInsets = layout.messageBubbleTextViewTextContainerInsets.top + layout.messageBubbleTextViewTextContainerInsets.bottom;
         CGFloat verticalFrameInsets = layout.messageBubbleTextViewFrameInsets.top + layout.messageBubbleTextViewFrameInsets.bottom;
 
-        //  same as above, an extra 2 points of magix
-        CGFloat finalWidth = MAX(stringSize.width + horizontalInsetsTotal, self.minimumBubbleWidth) + self.additionalInset;
+        CGSize attachmentButtonSize = [messageData hasAttachment] ? CGSizeMake(layout.attachmentButtonSize.width, layout.attachmentButtonSize.height + 10) : CGSizeZero;
         
+        //  same as above, an extra 2 points of magix
+        CGFloat finalWidth = MAX(MAX(stringSize.width + horizontalInsetsTotal, self.minimumBubbleWidth), attachmentButtonSize.width) + self.additionalInset;
+
         //  add extra 2 points of space (`self.additionalInset`), because `boundingRectWithSize:` is slightly off
         //  not sure why. magix. (shrug) if you know, submit a PR
         CGFloat verticalInsets = verticalContainerInsets + verticalFrameInsets + self.additionalInset;
         
-        CGSize attachmentButtonSize = [messageData hasAttachment] ? CGSizeMake(finalWidth, 30.0) : CGSizeZero;
-
         finalSize = CGSizeMake(finalWidth, stringSize.height + verticalInsets + attachmentButtonSize.height);
     }
 

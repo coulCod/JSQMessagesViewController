@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JSQMessagesCellAttachmentButton : UIButton
+typedef void(^TapOnAttachmentBlock)();
 
+@interface JSQMessagesCellAttachmentButton : UIButton
+@property (nonatomic, copy) TapOnAttachmentBlock tapOnAttachmentBlock;
 @end
