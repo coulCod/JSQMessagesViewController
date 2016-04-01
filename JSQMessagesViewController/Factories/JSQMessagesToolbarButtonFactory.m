@@ -74,4 +74,13 @@
     return sendButton;
 }
 
++ (UIButton *)imagedSendButtonItem
+{
+    UIButton *sendButton = [[UIButton alloc] initWithFrame:CGRectZero];
+    UIImage *btnImage = [UIImage imageNamed:@"send"];
+    [sendButton setImage:btnImage forState:UIControlStateNormal];
+    return sendButton;
+}
+
+
 @end
