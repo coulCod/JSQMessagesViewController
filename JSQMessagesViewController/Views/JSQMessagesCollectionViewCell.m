@@ -174,6 +174,8 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 
     self.avatarImageView.image = nil;
     self.avatarImageView.highlightedImage = nil;
+    
+    [self.attachmentButton setAttributedTitle:[[NSAttributedString alloc] initWithString:@"Вложение" attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:14.0 weight:UIFontWeightMedium], NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)}] forState:UIControlStateNormal];
 }
 
 - (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes
