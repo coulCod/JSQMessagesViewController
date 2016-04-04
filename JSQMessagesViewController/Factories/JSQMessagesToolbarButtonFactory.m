@@ -74,11 +74,17 @@
     return sendButton;
 }
 
-+ (UIButton *)imagedSendButtonItem
++ (UIButton *)imagedLeftButtonItem
 {
     UIButton *sendButton = [[UIButton alloc] initWithFrame:CGRectZero];
-    UIImage *btnImage = [UIImage imageNamed:@"send"];
-    [sendButton setImage:btnImage forState:UIControlStateNormal];
+    [sendButton setImage:[UIImage jsq_photoImage] forState:UIControlStateNormal];
+    return sendButton;
+}
+
++ (UIButton *)imagedRightButtonItem
+{
+    UIButton *sendButton = [[UIButton alloc] initWithFrame:CGRectZero];
+    [sendButton setImage:[UIImage jsq_sendImage] forState:UIControlStateNormal];
     return sendButton;
 }
 

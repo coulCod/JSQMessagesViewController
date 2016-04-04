@@ -122,6 +122,10 @@
                                                              context:nil];
 
         CGSize stringSize = CGRectIntegral(stringRect).size;
+        
+        if ([[messageData text] isEqualToString:@""] && [messageData hasAttachment]) {
+            stringSize = CGSizeMake(stringSize.width - 5, -8);
+        }
 
         CGFloat verticalContainerInsets = layout.messageBubbleTextViewTextContainerInsets.top + layout.messageBubbleTextViewTextContainerInsets.bottom;
         CGFloat verticalFrameInsets = layout.messageBubbleTextViewFrameInsets.top + layout.messageBubbleTextViewFrameInsets.bottom;

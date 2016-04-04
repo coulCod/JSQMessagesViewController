@@ -105,4 +105,15 @@
     return [UIImage jsq_bubbleImageFromBundleWithName:@"attachment"];
 }
 
++ (UIImage *)jsq_sendImage
+{
+    return [UIImage jsq_bubbleImageFromBundleWithName:@"send"];
+}
+
++ (UIImage *)jsq_photoImage
+{
+    return [UIImage jsq_bubbleImageFromBundleWithName:@"photo"];
+}
+
+
 @end

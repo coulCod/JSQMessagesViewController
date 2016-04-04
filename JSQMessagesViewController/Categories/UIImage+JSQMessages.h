@@ -78,4 +78,8 @@
 
 + (UIImage *)jsq_attachmentImage;
 
++ (UIImage *)jsq_sendImage;
+
++ (UIImage *)jsq_photoImage;
+
 @end

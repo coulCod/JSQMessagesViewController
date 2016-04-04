@@ -40,6 +40,7 @@
  *  @return A newly created button.
  */
 + (UIButton *)defaultSendButtonItem;
-+ (UIButton *)imagedSendButtonItem;
++ (UIButton *)imagedRightButtonItem;
++ (UIButton *)imagedLeftButtonItem;
 
 @end
