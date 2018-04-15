@@ -52,6 +52,13 @@
 
 @end
 
+@protocol JSQMessagesInputToolbarSendButtonController <NSObject>
+
+@required
+
+- (BOOL)messagesInputToolbarShouldEnableSendButton:(JSQMessagesInputToolbar *)toolbar;
+
+@end
 
 /**
  *  An instance of `JSQMessagesInputToolbar` defines the input toolbar for
@@ -63,6 +70,7 @@
  *  The object that acts as the delegate of the toolbar.
  */
 @property (weak, nonatomic) id<JSQMessagesInputToolbarDelegate> delegate;
+@property (weak, nonatomic) id<JSQMessagesInputToolbarSendButtonController> sendButtonController;
 
 /**
  *  Returns the content view of the toolbar. This view contains all subviews of the toolbar.

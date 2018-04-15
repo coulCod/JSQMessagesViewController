@@ -106,14 +106,23 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 
 - (void)toggleSendButtonEnabled
 {
-    BOOL hasText = [self.contentView.textView hasText];
-
+    BOOL sendButtonEnabled = [self isSendButtonShouldBeEnabled];
+    
     if (self.sendButtonOnRight) {
-        self.contentView.rightBarButtonItem.enabled = hasText;
+        self.contentView.rightBarButtonItem.enabled = sendButtonEnabled;
     }
     else {
-        self.contentView.leftBarButtonItem.enabled = hasText;
+        self.contentView.leftBarButtonItem.enabled = sendButtonEnabled;
     }
+}
+
+- (BOOL)isSendButtonShouldBeEnabled
+{
+    if (self.sendButtonController)
+    {
+        return [self.sendButtonController messagesInputToolbarShouldEnableSendButton:self];
+    }
+    return [self.contentView.textView hasText];
 }
 
 #pragma mark - Key-value observing
